@@ -15,4 +15,5 @@ dependencies = [
 [dependency-groups]
 dev = [
     "py-spy>=0.4.1",
+    "pymysql>=1.1.1",
 ]

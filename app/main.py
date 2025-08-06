@@ -3,6 +3,8 @@ from contextlib import asynccontextmanager
 from config.settings import settings
 from core.logging import logger
 from api.router import api_router
+from middleware.logging import RequestLoggingMiddleware
+from middleware.correlation import CorrelationIDMiddleware
 
 
 @asynccontextmanager
@@ -20,6 +22,9 @@ app = FastAPI(
     redoc_url="/redoc" if settings.DEBUG else None,
     openapi_url="/openapi.json" if settings.DEBUG else None,
 )
+
+app.add_middleware(CorrelationIDMiddleware)
+app.add_middleware(RequestLoggingMiddleware, exclude_paths={"/health", "/metrics"})
 
 
 @app.get("/")

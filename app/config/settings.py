@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+from pathlib import Path
 
 
 class Settings(BaseSettings):
@@ -16,6 +17,17 @@ class Settings(BaseSettings):
     # Log
     LOG_FORMAT: str = "json"
     LOG_LEVEL: str = "INFO"
+
+    # MY SQL
+    MYSQL_HOST: str
+    MYSQL_PORT: int
+    MYSQL_DATABASE: str
+    MYSQL_USER: str
+    MYSQL_PASSWORD: str
+
+    class Config:
+        env_file = Path(__file__).parent / ".env"  # <- C’est ça qui manque
+        env_file_encoding = "utf-8"
 
 
 @lru_cache
