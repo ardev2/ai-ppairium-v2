@@ -11,3 +11,6 @@ wheels/
 
 .env*
 !.env.example
+
+temp.md
+test.py
